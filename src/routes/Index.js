@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import withStyles from "@material-ui/core/styles/withStyles";
+import React, { Component } from 'react';
+import withStyles from '@material-ui/core/styles/withStyles';
 import {
   Typography,
   Grid,
@@ -10,10 +10,10 @@ import {
   CardActions,
   CardHeader,
   LinearProgress
-} from "@material-ui/core";
-import Axios from "axios";
-import red from "@material-ui/core/colors/red";
-import Contact from "../components/Contact";
+} from '@material-ui/core';
+import Axios from 'axios';
+import red from '@material-ui/core/colors/red';
+import Contact from '../components/Contact';
 
 const styles = {
   card: {
@@ -21,7 +21,7 @@ const styles = {
   },
   media: {
     height: 0,
-    paddingTop: "80.25%" // 16:9
+    paddingTop: '80.25%' // 16:9
   },
   avatar: {
     backgroundColor: red[500]
@@ -30,11 +30,11 @@ const styles = {
     padding: 20
   },
   textField: {
-    marginLeft: "2%",
-    width: "49%"
+    marginLeft: '2%',
+    width: '49%'
   },
   textField2: {
-    width: "49%"
+    width: '49%'
   },
   subSkill: {
     marginLeft: 20,
@@ -48,19 +48,20 @@ class Index extends Component {
   };
 
   componentDidMount() {
-    Axios.get("https://api.github.com/users/lolwuz").then(user => {
+    Axios.get('https://api.github.com/users/lolwuz').then(user => {
       this.setState({ user: user.data });
     });
   }
 
   render() {
     const { classes } = this.props;
-    const { name, login, bio, avatar_url } = this.state.user;
+    const { user } = this.state;
+    const { name, login, bio, avatar_url } = user;
 
     return (
       <div>
-        <Grid container justify="center" spacing={3}>
-          <Grid item alignItems="center" md={4}>
+        <Grid container justify="center" alignItems="center" spacing={3}>
+          <Grid item md={4}>
             <Card className={classes.card}>
               <CardHeader
                 avatar={<Avatar>L</Avatar>}
