@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   withStyles,
-  Paper,
   Typography,
   MobileStepper,
   Button,
@@ -10,9 +9,8 @@ import {
 } from '@material-ui/core';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import { useTheme, withTheme } from '@material-ui/styles';
 
-const styles = theme => ({
+const styles = {
   root: {
     flexGrow: 1,
     marginTop: 25
@@ -27,7 +25,7 @@ const styles = theme => ({
     display: 'block',
     width: '100%'
   }
-});
+};
 
 const tutorialSteps = {
   myschoolsmod: [

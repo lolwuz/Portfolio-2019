@@ -11,6 +11,7 @@ import { blue, red, orange } from '@material-ui/core/colors';
 
 const styles = {
   card: {
+    minWidth: 300,
     maxWidth: 500
   },
   a: {
@@ -34,13 +35,17 @@ const styles = {
 };
 
 const languages = [
+  { name: 'HTML', color: blue[700] },
   { name: 'Javascript', color: blue[500] },
+  { name: 'CSS', color: blue[300] },
   { name: 'Socket.io', color: blue[700] },
 
   { name: 'Python', color: red[500] },
   { name: 'Flask', color: red[700] },
 
-  { name: 'Java', color: orange[500] }
+  { name: 'Java', color: orange[500] },
+  { name: 'C++', color: orange[500] },
+  { name: 'C#', color: orange[500] }
 ];
 
 class Server extends Component {
@@ -60,7 +65,15 @@ class Server extends Component {
   getLanguageLink = () => {};
 
   render() {
-    const { name, description, img, languages, classes, children } = this.props;
+    const {
+      name,
+      description,
+      img,
+      languages,
+      link,
+      classes,
+      children
+    } = this.props;
 
     const languagesList = languages.map((language, key) => (
       <Chip
@@ -75,14 +88,24 @@ class Server extends Component {
     return (
       <Card className={classes.card}>
         <CardActionArea>
-          <Link to={`/view/${name}`} className={classes.a}>
-            <CardMedia
-              component="img"
-              alt={img}
-              height="140"
-              image={`/static/${img}`}
-              title="Contemplative Reptile"
-            />
+          <Link
+            target="_blank"
+            to={{
+              pathname: link || `/view/${name}`
+            }}
+            className={classes.a}
+            replace
+          >
+            {img && (
+              <CardMedia
+                component="img"
+                alt={img}
+                height="140"
+                src={`/static/${img}`}
+                title="Contemplative Reptile"
+              />
+            )}
+
             <CardContent className={classes.cardContent}>
               <Typography
                 gutterBottom

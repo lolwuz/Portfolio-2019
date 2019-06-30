@@ -19,16 +19,14 @@ import FaceIcon from '@material-ui/icons/Face';
 import ProjectIcon from '@material-ui/icons/Dashboard';
 import DnsIcon from '@material-ui/icons/Dns';
 import IconButton from '@material-ui/core/IconButton';
+import CodeIcon from '@material-ui/icons/Code';
+import GroupIcon from '@material-ui/icons/Group';
 import MenuIcon from '@material-ui/icons/Menu';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { blue } from '@material-ui/core/colors';
 import Routes from './routes/Routes';
-
-const theme = createMuiTheme({
-  palette: {
-    type: 'dark'
-  }
-});
+import Events from './components/Events';
+import { githubUser, linkedInUser, fullName, theme } from './constants';
 
 const drawerWidth = 240;
 
@@ -105,26 +103,35 @@ function App(props) {
         </ListItem>
       </List>
       <Divider />
-      <ListItem href="https://github.com/lolwuz" button>
+      <ListItem
+        component={Link}
+        target="_blank"
+        to={{
+          pathname: `https://github.com/${githubUser}/`
+        }}
+        button
+      >
         <ListItemIcon>
-          <DnsIcon />
+          <CodeIcon />
         </ListItemIcon>
         <ListItemText primary="Github" />
       </ListItem>
-      <ListItem component={Link} to="/servers/" button>
+      <ListItem
+        component={Link}
+        target="_blank"
+        to={{
+          pathname: `https://www.linkedin.com/in/${linkedInUser}/`
+        }}
+        button
+      >
         <ListItemIcon>
-          <DnsIcon />
+          <GroupIcon />
         </ListItemIcon>
         <ListItemText primary="LinkedIn" />
       </ListItem>
+      <Divider />
+      <Events />
       <List />
-
-      <div className={classes.bottom}>
-        <Typography variant="h6" noWrap>
-          lolwuz.ga
-        </Typography>
-        @2019 - Marten Hoekstra
-      </div>
     </div>
   );
 
@@ -145,16 +152,17 @@ function App(props) {
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" noWrap>
-                Portfolio website by Marten Hoekstra
+                Portfolio website by {fullName}
               </Typography>
             </Toolbar>
           </AppBar>
+
           <nav className={classes.drawer} aria-label="Mailbox folders">
             <Hidden smUp implementation="css">
               <Drawer
                 container={container}
                 variant="temporary"
-                anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                anchor="left"
                 open={mobileOpen}
                 onClose={handleDrawerToggle}
                 classes={{

@@ -11,13 +11,14 @@ import {
   CardHeader,
   LinearProgress
 } from '@material-ui/core';
-import Axios from 'axios';
+import axios from 'axios';
 import red from '@material-ui/core/colors/red';
-import Contact from '../components/Contact';
+import { githubUser } from '../constants';
 
 const styles = {
   card: {
-    maxWidth: 345
+    width: '100%',
+    maxWidth: 400
   },
   media: {
     height: 0,
@@ -39,38 +40,43 @@ const styles = {
   subSkill: {
     marginLeft: 20,
     marginTop: 20
+  },
+  a: {
+    textDecoration: 'none',
+    color: 'gray'
   }
 };
 
 class Index extends Component {
   state = {
-    user: {}
+    user: {},
+    avatarUrl: 'some default address/link/values'
   };
 
   componentDidMount() {
-    Axios.get('https://api.github.com/users/lolwuz').then(user => {
-      this.setState({ user: user.data });
+    axios.get(`https://api.github.com/users/${githubUser}`).then(user => {
+      this.setState({ user: user.data, avatarUrl: user.data.avatar_url });
     });
   }
 
   render() {
     const { classes } = this.props;
-    const { user } = this.state;
-    const { name, login, bio, avatar_url } = user;
+    const { user, avatarUrl } = this.state;
+    const { name, login, bio } = user;
 
     return (
       <div>
-        <Grid container justify="center" alignItems="center" spacing={3}>
-          <Grid item md={4}>
-            <Card className={classes.card}>
+        <Grid container spacing={3}>
+          <Grid item md={4} className={classes.card}>
+            <Card>
               <CardHeader
-                avatar={<Avatar>L</Avatar>}
+                avatar={<Avatar>{login && login[0].toUpperCase()}</Avatar>}
                 title={name}
                 subheader={login}
               />
               <CardMedia
                 className={classes.media}
-                image={avatar_url}
+                image={avatarUrl}
                 title={name}
               />
               <CardContent>
@@ -79,12 +85,10 @@ class Index extends Component {
                 </Typography>
               </CardContent>
 
-              <CardActions>
-                <Contact />
-              </CardActions>
+              <CardActions>{/* <Contact /> */}</CardActions>
             </Card>
           </Grid>
-          <Grid item md={4}>
+          <Grid item md={4} className={classes.card}>
             <Card>
               <CardContent>
                 <Typography variant="h6">Javascript/Typescript</Typography>
@@ -123,8 +127,8 @@ class Index extends Component {
             </Card>
           </Grid>
 
-          <Grid item md={4}>
-            <Card>
+          <Grid item md={4} className={classes.card}>
+            <Card className={classes.card}>
               <CardContent>
                 <Typography variant="h6">Python</Typography>
                 <LinearProgress variant="determinate" value={70} />

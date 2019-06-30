@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Server from '../components/Server';
 import liveServers from '../LiveServers';
 
 function Servers() {
   const serverList = liveServers.map(server => (
-    <Grid item md={4}>
+    <Grid item md={4} key={server.name}>
       <Server {...server} />
     </Grid>
   ));
