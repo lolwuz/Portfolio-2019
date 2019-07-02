@@ -84,6 +84,7 @@ class Events extends Component {
                   ))}
 
                 <span className={classes.created}>
+                  {' '}
                   at {new Date(Date.parse(created_at)).toLocaleString()}
                 </span>
               </React.Fragment>

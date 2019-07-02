@@ -1,32 +1,37 @@
-import React from 'react';
-import {
-  makeStyles,
-  createMuiTheme,
-  MuiThemeProvider
-} from '@material-ui/core/styles';
-import Hidden from '@material-ui/core/Hidden';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { Badge } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
+import { blue } from '@material-ui/core/colors';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import FaceIcon from '@material-ui/icons/Face';
+import { makeStyles, MuiThemeProvider } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import LightIcon from '@material-ui/icons/BrightnessHigh';
+import DarkIcon from '@material-ui/icons/BrightnessLow';
+import CodeIcon from '@material-ui/icons/Code';
 import ProjectIcon from '@material-ui/icons/Dashboard';
 import DnsIcon from '@material-ui/icons/Dns';
-import IconButton from '@material-ui/core/IconButton';
-import CodeIcon from '@material-ui/icons/Code';
+import FaceIcon from '@material-ui/icons/Face';
 import GroupIcon from '@material-ui/icons/Group';
 import MenuIcon from '@material-ui/icons/Menu';
+import React from 'react';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
-import { blue } from '@material-ui/core/colors';
-import Routes from './routes/Routes';
 import Events from './components/Events';
-import { githubUser, linkedInUser, fullName, theme } from './constants';
+import {
+  darkTheme,
+  fullName,
+  githubUser,
+  lightTheme,
+  linkedInUser
+} from './constants';
+import Routes from './routes/Routes';
 
 const drawerWidth = 240;
 
@@ -64,17 +69,28 @@ const useStyles = makeStyles(theme => ({
   bottom: {
     position: 'relative',
     bottom: 0
+  },
+  grow: {
+    flexGrow: 1
+  },
+  lightButton: {
+    float: 'right'
   }
 }));
 
-function App(props) {
+const App = props => {
   const { container } = props;
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [isDarkTheme, setDarkTheme] = React.useState(false);
 
-  function handleDrawerToggle() {
+  const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
-  }
+  };
+
+  const switchTheme = () => {
+    setDarkTheme(!isDarkTheme);
+  };
 
   const drawer = (
     <div>
@@ -137,7 +153,7 @@ function App(props) {
 
   return (
     <Router>
-      <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={isDarkTheme ? lightTheme : darkTheme}>
         <div className={classes.root}>
           <CssBaseline />
           <AppBar position="fixed" className={classes.appBar}>
@@ -154,6 +170,17 @@ function App(props) {
               <Typography variant="h6" noWrap>
                 Portfolio website by {fullName}
               </Typography>
+
+              <div className={classes.grow} />
+              <IconButton
+                aria-label="Show 4 new mails"
+                color="inherit"
+                onClick={switchTheme}
+              >
+                <Badge color="secondary">
+                  {isDarkTheme ? <LightIcon /> : <DarkIcon />}
+                </Badge>
+              </IconButton>
             </Toolbar>
           </AppBar>
 
@@ -196,6 +223,6 @@ function App(props) {
       </MuiThemeProvider>
     </Router>
   );
-}
+};
 
 export default App;

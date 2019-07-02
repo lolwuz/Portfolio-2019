@@ -19,7 +19,7 @@ class Projects extends Component {
     const { projects } = this.state;
 
     const projectList = projects.map(project => (
-      <Grid item md={4} key={project.id}>
+      <Grid item lg={4} key={project.id}>
         <Project
           name={project.name}
           description={project.description}

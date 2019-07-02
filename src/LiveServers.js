@@ -23,20 +23,6 @@ export default [
     img: 'buggle.jpg'
   },
   {
-    name: 'Portfolio',
-    description: 'Personal portfolio website created by Marten Hoekstra',
-    link: 'https://lolwuz.ga',
-    languages: ['Javascript', 'React', 'Material-ui'],
-    img: 'portfolio.png'
-  },
-  {
-    name: 'IMDB Movie Chatbot',
-    description: 'Personal portfolio website created by Marten Hoekstra',
-    link: 'https://lolwuz.ga',
-    languages: ['Java'],
-    img: 'portfolio.png'
-  },
-  {
     name: 'Teamspeak 3',
     description: 'Multi-purpose voice server for projects, work and discussion',
     link: 'ts3server://arankieskamp.com',

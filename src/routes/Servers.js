@@ -3,9 +3,9 @@ import Grid from '@material-ui/core/Grid';
 import Server from '../components/Server';
 import liveServers from '../LiveServers';
 
-function Servers() {
+const Servers = () => {
   const serverList = liveServers.map(server => (
-    <Grid item md={4} key={server.name}>
+    <Grid item lg={4} key={server.name}>
       <Server {...server} />
     </Grid>
   ));
@@ -17,6 +17,6 @@ function Servers() {
       </Grid>
     </div>
   );
-}
+};
 
 export default Servers;
